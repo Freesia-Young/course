@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.core.env.Environment;
 
-@SpringBootApplication
+//配置扫描从主包，或者直接配server包只是启动项目成功，但实际请求需要使用mapper时又报错了
+@SpringBootApplication(scanBasePackages = {"com.course"})
+//@SpringBootApplication(scanBasePackages = {"server"})
 @EnableEurekaClient
-@MapperScan("com.course.system.mapper")
+@MapperScan("com.course.server.mapper")
 public class SystemApplication {
 	private static final Logger LOG = LoggerFactory.getLogger(SystemApplication.class);
 
@@ -23,3 +25,4 @@ public class SystemApplication {
 	}
 
 }
+
