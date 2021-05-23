@@ -4,20 +4,15 @@ import Login from "./views/login.vue"
 
 Vue.use(Router);
 
-export default new Router({
-    mode: "history",
-    base: process.env.BASE_URL,
-    routes:[{
-        path: "*",
-        redirect: "/login",
-    }, {
-        path: "",
-        redirect: "/login",
-    }, {
-        path: "/login",
-        component: Login
-    }
+const routes = [
+    { path: '*', redirect:'/login'  },
+    { path: '/login', component: Login },
 
+]
 
-    ]
+const router = new Router({
+    mode:"history",
+    routes // (缩写) 相当于 routes: routes
 })
+
+export default router
