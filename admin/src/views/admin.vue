@@ -935,7 +935,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
-
+                      <router-view></router-view>
                 <!-- PAGE CONTENT ENDS -->
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -948,7 +948,7 @@
           <div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Ace</span>
-							Application &copy; 2013-2014
+							Application &copy; 2020-2021
 						</span>
 
             &nbsp; &nbsp;
@@ -977,13 +977,13 @@
 </template>
 
 <script>
+
 export default {
-  name: "admin"
+  name: "admin",
+  mounted() {
+    $('body').removeClass('class', 'login-layout light-login');
+    $('body').attr('class', 'no-skin');
+    console.log("admin")
+  }
 }
-$('body').removeClass('class', 'login-layout light-login');
-$('body').attr('class', 'no-skin');
 </script>
-
-<style scoped>
-
-</style>

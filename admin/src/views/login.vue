@@ -64,21 +64,6 @@
               </div><!-- /.login-box -->
               <!-- /.signup-box -->
             </div><!-- /.position-relative -->
-
-            <div class="navbar-fixed-top align-right">
-              <br />
-              &nbsp;
-              <a id="btn-login-dark" href="#">Dark</a>
-              &nbsp;
-              <span class="blue">/</span>
-              &nbsp;
-              <a id="btn-login-blur" href="#">Blur</a>
-              &nbsp;
-              <span class="blue">/</span>
-              &nbsp;
-              <a id="btn-login-light" href="#">Light</a>
-              &nbsp; &nbsp; &nbsp;
-            </div>
           </div>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -87,9 +72,12 @@
 </template>
 
 <script>
-$('body').attr('class', 'login-layout light-login');
 export default {
   name: 'login',
+  mounted() {
+    //$('body').removeClass('class', 'no-skin');
+    $('body').attr('class', 'login-layout light-login');
+  },
   methods:{
     login(){
       this.$router.push("/admin")
