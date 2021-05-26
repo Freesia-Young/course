@@ -39,9 +39,9 @@
                              targetPackage="com.course.server.mapper"
                              type="XMLMAPPER" />
 <!--从下面找要自动生成的表-->
-        <table tableName="test" domainObjectName="Test"/>
 <!--        <table tableName="test" domainObjectName="Test"/>-->
 <!--        <table tableName="chapter" domainObjectName="Chapter"/>-->
+        <table tableName="chapter" domainObjectName="Chapter"/>
 <!--        <table tableName="section" domainObjectName="Section"/>-->
 <!--        <table tableName="course" domainObjectName="Course"/>-->
 <!--        <table tableName="course_content" domainObjectName="CourseContent"/>-->
