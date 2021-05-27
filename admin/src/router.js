@@ -3,6 +3,7 @@ import Router from "vue-router"
 import Login from "./views/login.vue"
 import Admin from "./views/admin"
 import Welcome from "./views/admin/welcome"
+import Chapter from "./views/admin/chapter"
 
 Vue.use(Router);
 
@@ -15,6 +16,9 @@ const routes = [
         children:[{
             path: 'welcome',
             component:Welcome
+        },{
+            path: 'chapter',
+            component: Chapter
         }]
     },
 
