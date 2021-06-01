@@ -9,7 +9,7 @@ export default {
   name: "welcome",
   mounted() {
     $('body').attr('class', 'no-skin');
-    this.$parent.activeSidebar("welcome-sidebar");
+   // this.$parent.activeSidebar("welcome-sidebar");
   },
 
 }

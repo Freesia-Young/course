@@ -8,7 +8,7 @@ import Chapter from "./views/admin/chapter"
 Vue.use(Router);
 
 const routes = [
-    { path: '*', redirect:'/login'  },
+    { path: '', redirect:'/login'  },
     { path: '/login', component: Login},
     {
         path: '/',
