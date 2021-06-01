@@ -17,7 +17,7 @@ const routes = [
             path: 'welcome',
             component:Welcome
         },{
-            path: 'chapter',
+            path: 'business/chapter',
             component: Chapter
         }]
     },
