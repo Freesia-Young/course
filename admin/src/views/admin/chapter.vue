@@ -82,7 +82,7 @@ export default {
   },
   mounted() {
     //sidebar激活样式方法一
-    //this.$parent.activeSidebar("business-chapter-sidebar");
+    //this.$parent.activeSidebar("business-chapter-
     let _this = this;
     _this.list();
   },
