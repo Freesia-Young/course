@@ -1,11 +1,12 @@
 <template>
   <div>
     <p>
-    <button v-on:click="list" class="btn btn-white btn-default btn-round">
+    <button v-on:click="list(1)" class="btn btn-white btn-default btn-round">
       <i class="ace-icon fa fa-refresh blue"></i>
-      Cancel
+      刷新
     </button>
     </p>
+    <pagination ref="pagination" v-bind:list="list"></pagination>
     <table id="simple-table" class="table  table-bordered table-hover">
         <thead>
         <tr>
@@ -81,8 +82,10 @@
 </template>
 
 <script>
+import Pagination from "../../components/pagination"
 
 export default {
+  components: {Pagination},
   name: "chapter",
   data: function (){
         return {chapters:[]}
@@ -92,17 +95,18 @@ export default {
     //sidebar激活样式方法一
     //this.$parent.activeSidebar("business-chapter-
     let _this = this;
-    _this.list();
+    _this.list(1);
   },
   methods:{
-    list() {
+    list(page) {
         let _this = this;
         _this.$ajax.post('http://localhost:9000/business/admin/chapter/list',{
-          page: 1,
-          size: 1
+          page: page,
+          size: _this.$refs.pagination.size
         }).then((respond)=>{
             console.log("查询大章结果：",respond);
             _this.chapters = respond.data.list;
+            _this.$refs.pagination.render(page, respond.data.total);
         })
     }
   }
