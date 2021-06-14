@@ -85,7 +85,7 @@
       </table>
 
     <!--模态框-->
-    <div class="modal fade" tabindex="-1" role="dialog">
+    <div id="modal-form" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -138,7 +138,7 @@ export default {
   methods: {
     add() {
       let _this = this;
-      $(".modal").modal("show");
+      $("#modal-form").modal("show");
     },
 
     list(page) {
@@ -148,8 +148,8 @@ export default {
         size: _this.$refs.pagination.size
       }).then((respond) => {
         console.log("查询大章结果：", respond);
-        _this.chapters = respond.data.list;
-        _this.$refs.pagination.render(page, respond.data.total);
+        _this.chapters = respond.data.content.list;
+        _this.$refs.pagination.render(page, respond.data.content.total);
       })
     },
 
@@ -158,7 +158,11 @@ export default {
       _this.$ajax.post('http://localhost:9000/business/admin/chapter/save',
           _this.chapter).then((response) => {
         console.log("保存大章列表结果", response);
-        $(".modal").modal("hide");
+        if (response.data.success){
+          $("#modal-form").modal("hide");
+          _this.list(1);
+        }
+
       })
     }
   }
