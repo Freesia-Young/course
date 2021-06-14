@@ -97,20 +97,20 @@
               <div class="form-group">
                 <label  class="col-sm-2 control-label">大章名称</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="名称">
+                  <input type="text" v-model="chapter.name" class="form-control" placeholder="名称">
                 </div>
               </div>
               <div class="form-group">
                 <label  class="col-sm-2 control-label">课程ID</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="课程ID">
+                  <input type="text" v-model="chapter.course" class="form-control" placeholder="课程ID">
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">保存</button>
+            <button type="button" v-on:click="save()" class="btn btn-primary">保存</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -125,8 +125,9 @@ export default {
   components: {Pagination},
   name: "chapter",
   data: function (){
-        return {chapters:[]}
-
+        return {
+          chapter: {},
+          chapters: []}
   },
   mounted() {
     //sidebar激活样式方法一
@@ -134,24 +135,33 @@ export default {
     let _this = this;
     _this.list(1);
   },
-  methods:{
-    add(){
+  methods: {
+    add() {
       let _this = this;
       $(".modal").modal("show");
     },
+
     list(page) {
-        let _this = this;
-        _this.$ajax.post('http://localhost:9000/business/admin/chapter/list',{
-          page: page,
-          size: _this.$refs.pagination.size
-        }).then((respond)=>{
-            console.log("查询大章结果：",respond);
-            _this.chapters = respond.data.list;
-            _this.$refs.pagination.render(page, respond.data.total);
-        })
+      let _this = this;
+      _this.$ajax.post('http://localhost:9000/business/admin/chapter/list', {
+        page: page,
+        size: _this.$refs.pagination.size
+      }).then((respond) => {
+        console.log("查询大章结果：", respond);
+        _this.chapters = respond.data.list;
+        _this.$refs.pagination.render(page, respond.data.total);
+      })
+    },
+
+    save() {
+      let _this = this;
+      _this.$ajax.post('http://localhost:9000/business/admin/chapter/save',
+          _this.chapter).then((response) => {
+        console.log("保存大章列表结果", response);
+        $(".modal").modal("hide");
+      })
     }
   }
-
 }
 </script>
 
