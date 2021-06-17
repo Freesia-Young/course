@@ -29,23 +29,15 @@
           <td>{{chapter.course}}</td>
           <td>
             <div class="hidden-sm hidden-xs btn-group">
-              <button class="btn btn-xs btn-success">
-                <i class="ace-icon fa fa-check bigger-120"></i>
-              </button>
-
-              <button class="btn btn-xs btn-info">
+              <button v-on:click="edit(chapter)" class="btn btn-xs btn-info">
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
               </button>
 
               <button class="btn btn-xs btn-danger">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
               </button>
-
-              <button class="btn btn-xs btn-warning">
-                <i class="ace-icon fa fa-flag bigger-120"></i>
-              </button>
             </div>
-
+<!--            hidden样式：响应式，小屏会缩起操作那几个键-->
             <div class="hidden-md hidden-lg">
               <div class="inline pos-rel">
                 <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
@@ -138,8 +130,17 @@ export default {
   methods: {
     add() {
       let _this = this;
+      _this.chapter = {};   //数据绑定可以清空
       $("#modal-form").modal("show");
     },
+    edit(chapter) {
+      let _this = this;
+      _this.chapter = $.extend({},chapter); //数据绑定，绑的是<tr v-for="chapter in chapters">的数据
+      $("#modal-form").modal("show");
+
+      //存在问题：表单数据和表格数据不一致，在表单做了修改，点取消应该undo修改
+    },
+
 
     list(page) {
       let _this = this;
