@@ -128,34 +128,46 @@ export default {
         if (response.data.success){
           $("#modal-form").modal("hide");
           _this.list(1);
-          toast.success("保存成功");
+          Toast.success("保存成功");
         }
 
       })
     },
     del(id){
       let _this = this;
-      Swal.fire({
-        title: '确认要删除吗',
-        text: "删除了就无法恢复了",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '确认删除'
-      }).then((result) => {
-        if (result.value) {
-          Loading.show();
-          _this.$ajax.delete('http://localhost:9000/business/admin/chapter/delete/' + id).then((res)=>{
-            Loading.hide();
-            console.log("删除大章结果：",res);
-            if (res.data.success){
-              _this.list(1);
-              toast.success("删除成功");
-            }
-          })
-        }
-      })
+      Confirm.show("删除大章后不可恢复，确认删除？", function (){
+        Loading.show();
+        _this.$ajax.delete('http://localhost:9000/business/admin/chapter/delete/' + id).then((res)=>{
+          Loading.hide();
+          console.log("删除大章结果：",res);
+          if (res.data.success){
+            _this.list(1);
+            Toast.success("删除成功");
+          }
+        })
+      });
+
+      // Swal.fire({
+      //   title: '确认要删除吗',
+      //   text: "删除了就无法恢复了",
+      //   icon: 'warning',
+      //   showCancelButton: true,
+      //   confirmButtonColor: '#3085d6',
+      //   cancelButtonColor: '#d33',
+      //   confirmButtonText: '确认删除'
+      // }).then((result) => {
+      //   if (result.value) {
+      //     Loading.show();
+      //     _this.$ajax.delete('http://localhost:9000/business/admin/chapter/delete/' + id).then((res)=>{
+      //       Loading.hide();
+      //       console.log("删除大章结果：",res);
+      //       if (res.data.success){
+      //         _this.list(1);
+      //         Toast.success("删除成功");
+      //       }
+      //     })
+      //   }
+      // })
     }
   }
 }
