@@ -33,44 +33,11 @@
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
               </button>
 
-              <button class="btn btn-xs btn-danger">
+              <button v-on:click="del(chapter.id)" class="btn btn-xs btn-danger">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
               </button>
             </div>
 <!--            hidden样式：响应式，小屏会缩起操作那几个键-->
-            <div class="hidden-md hidden-lg">
-              <div class="inline pos-rel">
-                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                  <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                </button>
-
-                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                  <li>
-                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																			<span class="blue">
-																				<i class="ace-icon fa fa-search-plus bigger-120"></i>
-																			</span>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																			<span class="green">
-																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																			</span>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																			<span class="red">
-																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																			</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </td>
         </tr>
         </tbody>
@@ -140,8 +107,6 @@ export default {
 
       //存在问题：表单数据和表格数据不一致，在表单做了修改，点取消应该undo修改
     },
-
-
     list(page) {
       let _this = this;
       _this.$ajax.post('http://localhost:9000/business/admin/chapter/list', {
@@ -153,7 +118,6 @@ export default {
         _this.$refs.pagination.render(page, respond.data.content.total);
       })
     },
-
     save() {
       let _this = this;
       _this.$ajax.post('http://localhost:9000/business/admin/chapter/save',
@@ -165,6 +129,15 @@ export default {
         }
 
       })
+    },
+    del(id){
+      let _this = this;
+      _this.$ajax.delete('http://localhost:9000/business/admin/chapter/delete/' + id).then((res)=>{
+              console.log("删除大章结果：",res);
+              if (res.data.success){
+                _this.list(1);
+              }
+          })
     }
   }
 }
