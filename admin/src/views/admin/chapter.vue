@@ -126,6 +126,7 @@ export default {
         if (response.data.success){
           $("#modal-form").modal("hide");
           _this.list(1);
+          toast.success("保存成功");
         }
 
       })
@@ -146,11 +147,7 @@ export default {
             console.log("删除大章结果：",res);
             if (res.data.success){
               _this.list(1);
-              Swal.fire(
-                  '删除成功!',
-                  '大章记录已删除.',
-                  'success'
-              )
+              toast.success("删除成功");
             }
           })
         }
