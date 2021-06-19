@@ -109,10 +109,12 @@ export default {
     },
     list(page) {
       let _this = this;
+      Loading.show();
       _this.$ajax.post('http://localhost:9000/business/admin/chapter/list', {
         page: page,
         size: _this.$refs.pagination.size
       }).then((respond) => {
+        Loading.hide();
         console.log("查询大章结果：", respond);
         _this.chapters = respond.data.content.list;
         _this.$refs.pagination.render(page, respond.data.content.total);
@@ -142,8 +144,10 @@ export default {
         cancelButtonColor: '#d33',
         confirmButtonText: '确认删除'
       }).then((result) => {
-        if (result.isConfirmed) {
+        if (result.value) {
+          Loading.show();
           _this.$ajax.delete('http://localhost:9000/business/admin/chapter/delete/' + id).then((res)=>{
+            Loading.hide();
             console.log("删除大章结果：",res);
             if (res.data.success){
               _this.list(1);
