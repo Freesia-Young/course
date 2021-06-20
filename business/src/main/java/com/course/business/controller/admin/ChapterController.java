@@ -26,6 +26,9 @@ public class  ChapterController {
     @Resource
     private ChapterService chapterService;
 
+    /**
+     * 列表查询
+     */
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto){
         LOG.info("pageDto: {}",pageDto);
@@ -35,6 +38,9 @@ public class  ChapterController {
         return responseDto;
     }
 
+    /**
+     * 保存，id有值时更新，无值时新增
+     */
     @PostMapping("/save")
     public ResponseDto save(@RequestBody ChapterDto chapterDto){
 

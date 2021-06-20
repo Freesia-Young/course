@@ -95,11 +95,17 @@ export default {
     _this.list(1);
   },
   methods: {
+    /**
+     * 点击【新增】
+     */
     add() {
       let _this = this;
       _this.chapter = {};   //数据绑定可以清空
       $("#modal-form").modal("show");
     },
+    /**
+     * 点击【编辑】
+     */
     edit(chapter) {
       let _this = this;
       _this.chapter = $.extend({},chapter); //数据绑定，绑的是<tr v-for="chapter in chapters">的数据
@@ -107,6 +113,10 @@ export default {
 
       //存在问题：表单数据和表格数据不一致，在表单做了修改，点取消应该undo修改
     },
+
+    /**
+     * 列表查询
+     */
     list(page) {
       let _this = this;
       Loading.show();
@@ -120,6 +130,10 @@ export default {
         _this.$refs.pagination.render(page, respond.data.content.total);
       })
     },
+
+    /**
+     * 点击【保存】
+     */
     save() {
       let _this = this;
 
@@ -145,6 +159,9 @@ export default {
 
       })
     },
+    /**
+     * 点击【删除】
+     */
     del(id){
       let _this = this;
       Confirm.show("删除大章后不可恢复，确认删除？", function (){
@@ -158,28 +175,6 @@ export default {
           }
         })
       });
-
-      // Swal.fire({
-      //   title: '确认要删除吗',
-      //   text: "删除了就无法恢复了",
-      //   icon: 'warning',
-      //   showCancelButton: true,
-      //   confirmButtonColor: '#3085d6',
-      //   cancelButtonColor: '#d33',
-      //   confirmButtonText: '确认删除'
-      // }).then((result) => {
-      //   if (result.value) {
-      //     Loading.show();
-      //     _this.$ajax.delete('http://localhost:9000/business/admin/chapter/delete/' + id).then((res)=>{
-      //       Loading.hide();
-      //       console.log("删除大章结果：",res);
-      //       if (res.data.success){
-      //         _this.list(1);
-      //         Toast.success("删除成功");
-      //       }
-      //     })
-      //   }
-      // })
     }
   }
 }
