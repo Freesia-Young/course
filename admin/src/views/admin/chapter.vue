@@ -122,13 +122,25 @@ export default {
     },
     save() {
       let _this = this;
+
+      // 保存校验,对应的字段在v-model="chapter.course"
+      if (!Validator.require(_this.chapter.name, "名称")
+          ||!Validator.require(_this.chapter.course, "课程ID")
+          ||!Validator.length(_this.chapter.course, "课程ID", 1, 8)) {
+        return;
+      }
+
+      Loading.show();
       _this.$ajax.post('http://localhost:9000/business/admin/chapter/save',
           _this.chapter).then((response) => {
+        Loading.hide();
         console.log("保存大章列表结果", response);
         if (response.data.success){
           $("#modal-form").modal("hide");
           _this.list(1);
           Toast.success("保存成功");
+        }else{
+          Toast.warning(response.data.message);
         }
 
       })
