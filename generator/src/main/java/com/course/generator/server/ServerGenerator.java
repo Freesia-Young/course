@@ -13,10 +13,9 @@ import java.util.*;
 public class ServerGenerator {
 //    static String MODULE = "business";
 //    static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
-//    static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
+    static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
 //    static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
 //    static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
-      static  String toPath = "generator\\src\\main\\java\\com\\course\\generator\\test\\";
 
     public static void main(String[] args) throws Exception {
 //        String module = MODULE;
@@ -42,10 +41,13 @@ public class ServerGenerator {
 //        System.out.println("Domain："+tableElement.attributeValue("domainObjectName"));
 //
 //        List<Field> fieldList = DbUtil.getColumnByTableName(tableName);
-//        Set<String> typeSet = getJavaTypes(fieldList);
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("Domain", Domain);
-//        map.put("domain", domain);
+ //        Set<String> typeSet = getJavaTypes(fieldList);
+        //单侧试service
+        String Domain = "Section";
+        String domain = "section";
+        Map<String, Object> map = new HashMap<>();
+        map.put("Domain", Domain);
+        map.put("domain", domain);
 //        map.put("tableNameCn", tableNameCn);
 //        map.put("module", module);
 //        map.put("fieldList", fieldList);
@@ -56,16 +58,15 @@ public class ServerGenerator {
  //       FreemarkerUtil.generator(toDtoPath + Domain + "Dto.java", map);
 
         // 生成service
-  //      FreemarkerUtil.initConfig("service.ftl");
-  //      FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
+        FreemarkerUtil.initConfig("service.ftl");
+        FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
 //
 //        // 生成controller
 //        FreemarkerUtil.initConfig("controller.ftl");
 //        FreemarkerUtil.generator(toControllerPath + Domain + "Controller.java", map);
 
-        //测试freemaker
-        FreemarkerUtil.initConfig("test.ftl");
-        FreemarkerUtil.generator(toPath + "Test.java");
+        //测试freemarker
+
     }
 
     /**
