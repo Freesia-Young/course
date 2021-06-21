@@ -11,14 +11,14 @@ import java.io.File;
 import java.util.*;
 
 public class ServerGenerator {
-//    static String MODULE = "business";
+    static String MODULE = "business";
 //    static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
     static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
-//    static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
+    static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
 //    static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
     public static void main(String[] args) throws Exception {
-//        String module = MODULE;
+        String module = MODULE;
 //
 //        // 只生成配置文件中的第一个table节点
 //        File file = new File(generatorConfigPath);
@@ -61,9 +61,9 @@ public class ServerGenerator {
         FreemarkerUtil.initConfig("service.ftl");
         FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
 //
-//        // 生成controller
-//        FreemarkerUtil.initConfig("controller.ftl");
-//        FreemarkerUtil.generator(toControllerPath + Domain + "Controller.java", map);
+        // 生成controller
+        FreemarkerUtil.initConfig("controller.ftl");
+        FreemarkerUtil.generator(toControllerPath + Domain + "Controller.java", map);
 
         //测试freemarker
 
