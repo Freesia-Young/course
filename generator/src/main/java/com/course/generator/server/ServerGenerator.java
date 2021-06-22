@@ -45,11 +45,12 @@ public class ServerGenerator {
         //单侧试service
         String Domain = "Section";
         String domain = "section";
+        String tableNameCn = "小节1";
         Map<String, Object> map = new HashMap<>();
         map.put("Domain", Domain);
         map.put("domain", domain);
-//        map.put("tableNameCn", tableNameCn);
-//        map.put("module", module);
+        map.put("tableNameCn", tableNameCn);
+        map.put("module", module);
 //        map.put("fieldList", fieldList);
 //        map.put("typeSet", typeSet);
 //
