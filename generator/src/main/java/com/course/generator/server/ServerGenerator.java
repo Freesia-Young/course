@@ -1,7 +1,7 @@
 package com.course.generator.server;
 
-//import com.course.generator.util.DbUtil;
-//import com.course.generator.util.Field;
+import com.course.generator.util.DbUtil;
+import com.course.generator.util.Field;
 import com.course.generator.util.FreemarkerUtil;
 //import org.dom4j.Document;
 //import org.dom4j.Element;
@@ -12,13 +12,12 @@ import java.util.*;
 
 public class ServerGenerator {
     static String MODULE = "business";
-//    static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
+    static String toDtoPath = "server\\src\\main\\java\\com\\course\\server\\dto\\";
     static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
     static String toControllerPath = MODULE + "\\src\\main\\java\\com\\course\\" + MODULE + "\\controller\\admin\\";
 //    static String generatorConfigPath = "server\\src\\main\\resources\\generator\\generatorConfig.xml";
 
     public static void main(String[] args) throws Exception {
-        String module = MODULE;
 //
 //        // 只生成配置文件中的第一个table节点
 //        File file = new File(generatorConfigPath);
@@ -40,28 +39,30 @@ public class ServerGenerator {
 //        System.out.println("表："+tableElement.attributeValue("tableName"));
 //        System.out.println("Domain："+tableElement.attributeValue("domainObjectName"));
 //
-//        List<Field> fieldList = DbUtil.getColumnByTableName(tableName);
- //        Set<String> typeSet = getJavaTypes(fieldList);
         //单侧试service
         String Domain = "Section";
         String domain = "section";
-        String tableNameCn = "小节1";
+        String tableNameCn = "小节";
+        String module = MODULE;
         Map<String, Object> map = new HashMap<>();
+        List<Field> fieldList = DbUtil.getColumnByTableName(domain);
+        Set<String> typeSet = getJavaTypes(fieldList);
         map.put("Domain", Domain);
         map.put("domain", domain);
         map.put("tableNameCn", tableNameCn);
         map.put("module", module);
-//        map.put("fieldList", fieldList);
-//        map.put("typeSet", typeSet);
-//
+        map.put("fieldList", fieldList);
+        map.put("typeSet", typeSet);
+
+
         // 生成dto
- //       FreemarkerUtil.initConfig("dto.ftl");
- //       FreemarkerUtil.generator(toDtoPath + Domain + "Dto.java", map);
+        FreemarkerUtil.initConfig("dto.ftl");
+        FreemarkerUtil.generator(toDtoPath + Domain + "Dto.java", map);
 
         // 生成service
         FreemarkerUtil.initConfig("service.ftl");
         FreemarkerUtil.generator(toServicePath + Domain + "Service.java", map);
-//
+
         // 生成controller
         FreemarkerUtil.initConfig("controller.ftl");
         FreemarkerUtil.generator(toControllerPath + Domain + "Controller.java", map);
@@ -73,12 +74,12 @@ public class ServerGenerator {
     /**
      * 获取所有的Java类型，使用Set去重
      */
-//    private static Set<String> getJavaTypes(List<Field> fieldList) {
-//        Set<String> set = new HashSet<>();
-//        for (int i = 0; i < fieldList.size(); i++) {
-//            Field field = fieldList.get(i);
-//            set.add(field.getJavaType());
-//        }
-//        return set;
-//    }
+    private static Set<String> getJavaTypes(List<Field> fieldList) {
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < fieldList.size(); i++) {
+            Field field = fieldList.get(i);
+            set.add(field.getJavaType());
+        }
+        return set;
+    }
 }

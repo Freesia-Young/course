@@ -1,8 +1,7 @@
 package com.course.server.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SectionDto {
 
@@ -17,12 +16,12 @@ public class SectionDto {
     private String title;
 
     /**
-     * 课程|course.id
+     * 课程|course_id
      */
     private String courseId;
 
     /**
-     * 章|chapter.id
+     * 大章|chapter_id
      */
     private String chapterId;
 
@@ -50,15 +49,13 @@ public class SectionDto {
      * 创建时间
      */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date createdAt;
+    private Date createAt;
 
     /**
      * 修改时间
      */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date updatedAt;
-
-    private String vod;
+    private Date updateAt;
 
     public String getId() {
         return id;
@@ -124,45 +121,40 @@ public class SectionDto {
         this.sort = sort;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
     }
 
-    public String getVod() {
-        return vod;
-    }
-
-    public void setVod(String vod) {
-        this.vod = vod;
-    }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("SectionDto{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", courseId='").append(courseId).append('\'');
-        sb.append(", chapterId='").append(chapterId).append('\'');
-        sb.append(", video='").append(video).append('\'');
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", title=").append(title);
+        sb.append(", courseId=").append(courseId);
+        sb.append(", chapterId=").append(chapterId);
+        sb.append(", video=").append(video);
         sb.append(", time=").append(time);
-        sb.append(", charge='").append(charge).append('\'');
+        sb.append(", charge=").append(charge);
         sb.append(", sort=").append(sort);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", vod='").append(vod).append('\'');
-        sb.append('}');
+        sb.append(", createAt=").append(createAt);
+        sb.append(", updateAt=").append(updateAt);
+        sb.append("]");
         return sb.toString();
     }
 
